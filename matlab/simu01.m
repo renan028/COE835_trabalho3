@@ -29,7 +29,7 @@ global filter_param dc a w gamma thetas am;
 
 am = 1;
 
-plant_param = [1 2];
+plant_param = [1 2]';
 filter_param = [1]';
 
 dc = 1;

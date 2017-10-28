@@ -13,15 +13,14 @@
 %======================================================================
 function dx=gradiente03(t,x)
 
-global filter_param dc a w gamma am km thetas;
+global filter_param dc a w gamma thetas;
 
-ym     = x(1);
-theta = x(2:7);
-uf = x(8:10);
-yf = x(11:13);
+theta = x(1:6);
+uf = x(7:9);
+yf = x(10:12);
 
 %--------------------------
-r = dc + a*sin(w*t) + a*sin(2*w*t) + a*sin(3*w*t) + a*sin(4*w*t);
+r = dc + a*sin(w*t) + a*sin(2*w*t)+ a*sin(3*w*t) + a*sin(4*w*t);
 
 phi = [uf' yf']';
 y = thetas'*phi;
@@ -36,13 +35,11 @@ yhat = theta'*phi;
 
 epsilon = yhat - y;
 
-dym = -am*ym + km*r;
-
 m2 = 1 + phi'*phi;
 
 dtheta = -gamma*phi*epsilon/m2;
 
 %--------------------------
-dx = [dym dtheta' duf' dyf']';    %Translation
+dx = [dtheta' duf' dyf']';    %Translation
 
 %---------------------------
