@@ -15,13 +15,13 @@ clear;
 clc;
 
 disp('-------------------------------')
-disp('Script para simular o exemplo 9')
+disp('Script para simular o algoritmo Gradiente')
 disp(' ')
-disp('Caso: Planta ............. n = 1')
+disp('Caso: Planta ............. n = 3')
 disp('      Grau relativo ..... n* = 1')
-disp('      Parâmetros ........ np = 2')
+disp('      Parâmetros ........ np = 6')
 disp(' ')
-disp('Algoritmo: MRAC direto')
+disp('Algoritmo: Gradiente')
 disp(' ')
 disp('-------------------------------')
 
@@ -37,7 +37,7 @@ a  = 1;
 w  = 1;
 km= 1;
 
-gamma = [2 0; 0 2];
+gamma = 2*eye(6);
 
 uf0 = [0 0 0]';
 yf0 = [0 0 0]';
@@ -45,30 +45,30 @@ ym0 = 0;
 theta0 = zeros(6,1);
 
 %-----------------------
-thetas = [plant_param(1:3)' filter_param-plant_param(4:6)']' 
+thetas = [plant_param(1:3)' (filter_param-plant_param(4:6))']'; 
 
 %-----------------------
 clf;
 tf = 25;
 
-init = [ym0 theta0 uf0 yf0];
+init = [ym0 theta0' uf0' yf0']';
 
 options = odeset('OutputFcn','odeplot');
 [T,X] = ode23s('gradiente',tf,init,options);
 
-ym     = X(1);
-theta = X(2:7);
-uf = X(8:10);
-yf = X(11:13);
+ym     = X(:,1);
+theta = X(:,2:7)';
+uf = X(:,8:10)';
+yf = X(:,11:13)';
 
-phi = [uf' yf']'
-y = thetas'*phi;
+phi = [uf' yf']';
+y = thetas.'*phi;
 
-yhat = theta'*phi;
+yhat = theta.'*phi;
 
 epsilon = yhat - y;
 e =  y - ym;
-r = dc + a.*sin(w.*T);
+r = dc + a*sin(w.*T) + a*sin(2*w.*T) + a*sin(3*w.*T) + a*sin(4*w.*T);
 modtt = theta'*theta;
 
 figure(1)
@@ -81,8 +81,8 @@ print -depsc2 fig01a
 figure(2)
 clf
 subplot(211)
-plot(T,theta1,T,theta2);grid;shg
-legend('\theta_1','\theta_2','Location','SouthEast')
+plot(T,theta);grid;shg
+legend('\theta','Location','SouthEast')
 print -depsc2 fig01b
 
 figure(3)
