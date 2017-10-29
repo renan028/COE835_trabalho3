@@ -15,7 +15,7 @@ clear;
 clc;
 
 disp('-------------------------------')
-disp('Script para simular o algoritmo Gradiente')
+disp('Script para simular o algoritmo LeastSquare')
 disp(' ')
 disp('Caso: Planta ............. n = 1')
 disp('      Grau relativo ..... n* = 1')
@@ -25,7 +25,10 @@ disp('Algoritmo: Gradiente')
 disp(' ')
 disp('-------------------------------')
 
-global filter_param dc a w gamma thetas;
+global filter_param dc a w thetas;
+
+P0 = eye(2);
+p0 = reshape(P0,length(P0)^2,1);
 
 plant_param = [1 2]';
 filter_param = [1]';
@@ -33,8 +36,6 @@ filter_param = [1]';
 dc = 1;
 a  = 5;
 w  = 1;
-
-gamma = 10*eye(2);
 
 uf0 = [0]';
 yf0 = [0]';
@@ -45,12 +46,12 @@ thetas = [plant_param(1)' (filter_param-plant_param(2))']';
 
 %-----------------------
 clf;
-tf = 25;
+tf = 200;
 
-init = [theta0' uf0' yf0']';
+init = [theta0' uf0' yf0' p0'];
 
 options = odeset('OutputFcn','odeplot');
-[T,X] = ode23s('gradiente01',tf,init,options);
+[T,X] = ode23s('ls01',tf,init,options);
 
 theta = X(:,1:2)';
 uf = X(:,3)';
