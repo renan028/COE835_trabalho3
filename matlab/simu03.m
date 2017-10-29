@@ -36,7 +36,7 @@ w  = 1;
 
 gamma = 20*eye(6);
 
-uf0 = [dc 0 0]';
+uf0 = [0 0 0]';
 yf0 = [0 0 0]';
 theta0 = zeros(6,1);
 

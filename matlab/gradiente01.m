@@ -24,9 +24,8 @@ r = dc + a*sin(w*t) + a*sin(2*w*t);
 
 phi = [uf' yf']';
 y = thetas'*phi;
-omega = [ y r ]';
 
-u = theta.'*omega;
+u = r;
 duf = [u-(flip(filter_param)'*uf)]';
 dyf = [y-(flip(filter_param)'*yf)]';
 
