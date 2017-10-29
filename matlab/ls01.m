@@ -36,7 +36,7 @@ yhat = theta'*phi;
 
 epsilon = yhat - y;
 
-m2 = 1 + phi'*phi;
+m2 = 1 + phi'*P*phi;
 
 dtheta = -P*phi*epsilon/m2;
 dP = -P*(phi*phi')*P/m2;
