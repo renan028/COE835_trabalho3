@@ -4,9 +4,9 @@
 %
 %  Script para simular exemplo 
 %
-%  MRAC  : n  = 1     First order plant
-%          n* = 1     Relative degree
-%          np = 2     Adaptive parameters
+%  Gradient  : n  = 1     First order plant
+%              n* = 1     Relative degree
+%              np = 2     Adaptive parameters
 %
 %                                                        Ramon R. Costa
 %                                                        30/abr/13, Rio
