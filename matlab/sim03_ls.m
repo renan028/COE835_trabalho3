@@ -4,9 +4,9 @@
 %
 %  Script para simular exemplo 
 %
-%  Gradient  : n  = 3     Third order plant
-%              n* = 1     Relative degree
-%              np = 6     Adaptive parameters
+%  Least-square  : n  = 3     Third order plant
+%                  n* = 1     Relative degree
+%                  np = 6     Adaptive parameters
 %
 %                                                        Ramon R. Costa
 %                                                        30/abr/13, Rio
@@ -15,7 +15,7 @@ clear;
 clc;
 
 disp('-------------------------------')
-disp('Script para simular o algoritmo Gradiente')
+disp('Script para simular o algoritmo Least-square')
 disp(' ')
 disp('Caso: Planta ............. n = 3')
 disp('      Grau relativo ..... n* = 1')
@@ -25,16 +25,18 @@ disp('Algoritmo: Gradiente')
 disp(' ')
 disp('-------------------------------')
 
-global filter_param dc a w gamma thetas;
+global filter_param dc a w thetas;
 
 plant_param = [1 3/5 9/100 3/2 3/4 1/8]';
 filter_param = [3 3 1]';
+
+P0 = eye(6);
+p0 = reshape(P0,length(P0)^2,1);
 
 dc = 1;
 a  = 5;
 w  = 1;
 
-gamma = 20*eye(6);
 
 uf0 = [0 0 0]';
 yf0 = [0 0 0]';
@@ -47,10 +49,10 @@ thetas = [plant_param(1:3)' (filter_param-plant_param(4:6))']';
 clf;
 tf = 30;
 
-init = [theta0' uf0' yf0']';
+init = [theta0' uf0' yf0' p0']';
 
 options = odeset('OutputFcn','odeplot');
-[T,X] = ode23s('gradiente03',tf,init,options);
+[T,X] = ode23s('ls03',tf,init,options);
 
 theta = X(:,1:6)';
 uf = X(:,7:9)';
@@ -74,19 +76,19 @@ T,thetas(5,:), T,thetas(6,:));grid;shg
 legend('\theta_1','\theta_2','\theta_3','\theta_4','\theta_5', ...
 '\theta_6', '\theta_{1s}', '\theta_{2s}','\theta_{3s}','\theta_{4s}', ...
 '\theta_{5s}','\theta_{6s}','Location','SouthEast')
-print -depsc2 fig02
+print -depsc2 ls03theta
 
 figure(2)
 clf
 plot(T,modtt);grid;shg
 legend('|\theta|','Location','SouthEast')
-print -depsc2 fig03
+print -depsc2 ls03modtt
 
 figure(3)
 clf
 plot(T,epsilon);grid;shg
 legend('\epsilon','Location','SouthEast')
-print -depsc2 fig04
+print -depsc2 ls03epsilon
 
 %---------------------------------------------------------------------
 
