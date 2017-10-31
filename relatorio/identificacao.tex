@@ -2,7 +2,7 @@
 \section{Identificação de parâmetros}
 
 Identificação de parâmetros é usar a coleção de sinais disponíveis do sistema,
-baseado em algum critério de otimalidade e informação da estrutura,
+baseado em algum critério de otimalidade,
 para produzir uma estimativa dos parâmetros desconhecidos da planta.
 Identificação adaptativa dos parâmetros é um procedimento de estimação dinâmica que faz uso da atualização
 dos sinais do sistema para estimar os parâmetros desconehcidos, atualizados
@@ -42,12 +42,13 @@ y(t) = \frac{Z(s)}{\Lambda(s)}[u](t)+\frac{\Lambda(s)-P(s)}{\Lambda(s)}[y](t).
 
 Introduzindo o vetor de parâmetros e regressor:
 
-\begin{equation}
-\theta* =
-\left[z_0,z_1,\ldots,z_{m-1},z_m,\lambda_0-p_0,\lambda_1-p_1,\ldots,\lambda_{n-2}-p_{n-2},\lambda{n-1}-p_{n-1}\right]^\intercal
-\in \mathbb{R}^{n+m+1},
+\begin{gather}
+\theta* = \left[z_0 \quad z_1 \quad \ldots \quad z_{m-1} \quad z_m \quad
+\right. \\
+\left. \lambda_0-p_0 \quad \lambda_1-p_1 \quad \ldots \quad
+\lambda_{n-2}-p_{n-2} \quad \lambda{n-1}-p_{n-1}\right]^\intercal \in \mathbb{R}^{n+m+1},
 \label{eq:parameters}
-\end{equation}
+\end{gather}
 
 \begin{gather}
 \phi(t) =

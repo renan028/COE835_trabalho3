@@ -38,7 +38,7 @@ theta0_2 = ones(2*N,1);
 run sim01.m;
 
 %% 2nd order system
-tf = 1000; %simulation time
+tf = 5000; %simulation time
 plant_param = [1 1 4 4]';
 % plant_param = [1 .1 .4 .04]';
 filter_param = [2 1]';
@@ -49,10 +49,10 @@ thetas = [flip(plant_param(1:N))' (flip(filter_param-plant_param(N+1:end)))']';
 dc_1 = 0;
 W_1 = 5*rand(1,2);
 A_1 = zeros(1,length(W_1));
-A_1(1) = 10;
-A_1(2) = 0;
+A_1(1) = 30;
+A_1(2) = 25;
 
-gamma_1 = 10;
+gamma_1 = 100;
 
 uf0_1 = zeros(N,1);
 yf0_1 = zeros(N,1);
@@ -65,7 +65,7 @@ A_2 = zeros(1,length(W_2));
 A_2(1) = 30;
 A_2(2) = 25;
 
-gamma_2 = 20;
+gamma_2 = 100;
 
 uf0_2 = ones(N,1);
 yf0_2 = ones(N,1);
