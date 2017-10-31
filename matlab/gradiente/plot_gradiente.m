@@ -57,9 +57,9 @@ switch changed
         file_name = 'theta01theta02';
 end
 
-path_tiltheta = strcat('./tiltheta/',sim_str,file_name,'.eps');
-path_modtheta = strcat('./modtheta/',sim_str,file_name,'.eps');
-path_epsilon = strcat('./epsilon/',sim_str,file_name,'.eps');
+path_tiltheta = strcat('../../relatorio/figs/gradiente/tiltheta/',sim_str,file_name,'.eps');
+path_modtheta = strcat('../../relatorio/figs/gradiente/modtheta/',sim_str,file_name,'.eps');
+path_epsilon = strcat('../../relatorio/figs/gradiente/epsilon/',sim_str,file_name,'.eps');
 
 %--------------- Fig1: til_theta -------------
 figure(1);clf;

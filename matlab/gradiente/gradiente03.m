@@ -13,14 +13,17 @@
 %======================================================================
 function dx=gradiente03(t,x)
 
-global filter_param dc a w gamma thetas;
+global filter_param dc A W gamma thetas;
 
 theta = x(1:6);
 uf = x(7:9);
 yf = x(10:12);
 
 %--------------------------
-r = dc + a*sin(w*t) + a*sin(2*w*t)+ a*sin(3*w*t) + a*sin(4*w*t);
+r = dc;
+for i=1:length(A)
+    r = r + A(i)*sin(W(i)*t);
+end
 
 phi = [uf' yf']';
 y = thetas'*phi;

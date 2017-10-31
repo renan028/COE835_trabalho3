@@ -43,7 +43,7 @@ init = [theta0' uf0' yf0']';
 [T_1,X_1] = ode23s('gradiente02',tf,init,options);
 
 theta_1 = X_1(:,1:4)';
-tiltheta_1 = theta_1 - thetas;
+tiltheta_1 = theta_1 - thetas.*ones(2*N,length(theta_1));
 uf_1 = X_1(:,5:6)';
 yf_1 = X_1(:,7:8)';
 phi_1 = [uf_1' yf_1']';
@@ -71,7 +71,7 @@ init = [theta0' uf0' yf0']';
 [T_2,X_2] = ode23s('gradiente02',tf,init,options);
 
 theta_2 = X_2(:,1:4)';
-tiltheta_2 = theta_2 - thetas;
+tiltheta_2 = theta_2 - thetas.*ones(2*N,length(theta_2));
 uf_2 = X_2(:,5:6)';
 yf_2 = X_2(:,7:8)';
 phi_2 = [uf_2' yf_2']';
@@ -101,7 +101,7 @@ init = [theta0' uf0' yf0']';
 [T_2,X_2] = ode23s('gradiente02',tf,init,options);
 
 theta_2 = X_2(:,1:4)';
-tiltheta_2 = theta_2 - thetas;
+tiltheta_2 = theta_2 - thetas.*ones(2*N,length(theta_2));
 uf_2 = X_2(:,5:6)';
 yf_2 = X_2(:,7:8)';
 phi_2 = [uf_2' yf_2']';
@@ -131,7 +131,7 @@ init = [theta0' uf0' yf0']';
 [T_2,X_2] = ode23s('gradiente02',tf,init,options);
 
 theta_2 = X_2(:,1:4)';
-tiltheta_2 = theta_2 - thetas;
+tiltheta_2 = theta_2 - thetas.*ones(2*N,length(theta_2));
 uf_2 = X_2(:,5:6)';
 yf_2 = X_2(:,7:8)';
 phi_2 = [uf_2' yf_2']';
