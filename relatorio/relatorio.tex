@@ -32,6 +32,9 @@
      
 \input{macros}
 
+%Set normal paragraph spacing
+\setlength\parindent{24pt}
+
 \begin{document}
 %---------------------------------------------------------------------
 \pagestyle{fancy}%
@@ -56,13 +59,13 @@ Matheus Ferreira dos Reis \\[2mm]
 Renan Salles de Freitas \\[10mm]
 }
 
-\textbf{Algoritmo:} \quad \HI{MRAC Indireto}\\[2mm]
+\textbf{Algoritmo:} \quad \HI{Identificação de parâmetros}\\[2mm]
 
 \bigskip%
 Caso: \quad \parbox[t]{10cm}{
-  $~n = 1$ \quad (ordem da planta) \\[2mm]
+  $~n = 1, 2, 3$ \quad (ordem da planta) \\[2mm]
   $n^* = 1$ \quad (grau relativo) \\[2mm]
-  $n_p = 1$ \quad (\# de parâmetros) \\[15mm]
+  $n_p = 2, 4, 6$ \quad (\# de parâmetros) \\[15mm]
 }
 
 %---------------------------------------------------------------------
@@ -70,8 +73,9 @@ Caso: \quad \parbox[t]{10cm}{
 \newpage
 %---------------------------------------------------------------------
 \input{resumo} \newpage
-\input{MRAC_indireto}
+\input{identificacao}
 \input{diagramas} \newpage
+\input{implementacao}
 \input{simulations} \newpage
 \input{discussao} 
 %---------------------------------------------------------------------
