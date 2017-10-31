@@ -1,0 +1,156 @@
+%---------------------------------------------------------------------
+\section{Identificação de parâmetros}
+
+Identificação de parâmetros é usar a coleção de sinais disponíveis do sistema,
+baseado em algum critério de otimalidade e informação da estrutura,
+para produzir uma estimativa dos parâmetros desconhecidos da planta.
+Identificação adaptativa dos parâmetros é um procedimento de estimação dinâmica que faz uso da atualização
+dos sinais do sistema para estimar os parâmetros desconehcidos, atualizados
+on-line. A identificação adaptativa de parâmetros é crucial para o projeto de
+controladores adaptativos, onde os parâmetros de controle devem ser atualizados 
+on-line ao mesmo tempo em que o sistema está em operação.
+
+Considere um sistema linear invariante no tempo descrito pela equação
+diferencial (Eq. \ref{eq:planta}):
+
+\begin{equation}
+P(s)[y](t) = Z(s)[u](t),
+\label{eq:planta}
+\end{equation}
+
+onde $y(t) \in \mathbb{R}$ e $u(t) \in \mathbb{R}$ são os sinais medidos de
+saída e entrada do sistema;
+
+\begin{gather}
+P(s) = s^n + p_{n-1}s^{n-1}+\ldots + p_1s+p_0,\\
+Z(s) = z_ms^m + z_{m-1}s^{m-1}+\ldots + z_1s+z_0
+\label{eq:poly}
+\end{gather}
+
+são os polinômios em $s$, $s$ sendo o operador de diferencial
+$s[x](t)=\dot{x}(t)$; e $p_i, i = 0,1,\ldots,n-1$, $z_i, i=0,1,\ldots,m$ com
+$n>m$, são os parâmetros desconhecidos da planta.
+
+Escolhe-se um polinômio estável $\Lambda(s) =
+s^n+\lambda_{n-1}s^{n-1}+\ldots+\lambda_1s+\lambda_0$. Multiplicando ambos os
+lados da equação \ref{eq:planta} pelo filtro $\frac{1}{\Lambda(s)}$, temos:
+ 
+\begin{equation}
+y(t) = \frac{Z(s)}{\Lambda(s)}[u](t)+\frac{\Lambda(s)-P(s)}{\Lambda(s)}[y](t).
+\label{eq:filter_plant}
+\end{equation}
+
+Introduzindo o vetor de parâmetros e regressor:
+
+\begin{equation}
+\theta* =
+\left[z_0,z_1,\ldots,z_{m-1},z_m,\lambda_0-p_0,\lambda_1-p_1,\ldots,\lambda_{n-2}-p_{n-2},\lambda{n-1}-p_{n-1}\right]^\intercal
+\in \mathbb{R}^{n+m+1},
+\label{eq:parameters}
+\end{equation}
+
+\begin{gather}
+\phi(t) =
+\left[\frac{1}{\Lambda(s)}[u](t),\frac{s}{\Lambda(s)}[u](t),\ldots,\frac{s^{m+1}}{\Lambda(s)}[u](t),\frac{s^{m}}{\Lambda(s)}[u](t),\right.
+\\
+\left.
+\nonumber
+\frac{1}{\Lambda(s)}[y](t),\frac{s}{\Lambda(s)}[y](t),\ldots,\frac{s^{n-2}}{\Lambda(s)}[y](t),\frac{s^{n-1}}{\Lambda(s)}[y](t)
+\right]^\intercal \in \mathbb{R}^{n+m+1},
+\label{eq:regressor}
+\end{gather}
+
+podemos expressar \ref{eq:filter_plant} como:
+
+\begin{equation}
+y(t) = \theta^{*\intercal}\phi(t).
+\label{eq:thetaphi}
+\end{equation}
+
+A implementação do filtro é realizada pela construção de dois sistemas
+dinâmicos, na realização de estados:
+
+\begin{gather}
+\dot{\omega}(t) = A_\lambda\omega_1(t)+bu(t)\\
+\dot{\omega}_2(t) = A_\lambda\omega_2(t)+by(t),
+\label{eq:statespace}
+\end{gather}
+
+onde $\omega_1(t) \in \mathbb{R}^n$, $\omega_2(t) \in \mathbb{R}^n$ e
+
+\begin{equation}
+A_\lambda = 
+\begin{bmatrix}
+    0      & 1      & 0      & \dots  & 0      & 0      \\
+    0      & 0      & 1      & 0      & \dots  & 0      \\
+    \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+    0      & 0      & \dots  & \dots  & 0      & 1      \\
+    -\lambda_0 & -\lambda_1 & \dots & \dots & -\lambda_{n-2} & -\lambda_{n-1} 
+\end{bmatrix}
+, b =
+\begin{bmatrix}
+    0  \\
+    \vdots  \\
+    0 \\
+    1 \\ 
+\end{bmatrix}
+\in \mathbb{R}^n
+\label{eq:statespace}
+\end{equation}
+
+E o vetor regressor $\phi(t)$ pode ser escrito como:
+\begin{gather}
+\phi(t) = \left[
+(C_m\omega_1(t))^\intercal,\omega_2^\intercal(t)\right]^\intercal,\\
+C_m = \left[I_{m+1},0_{(m+1)\times(n-m-1)}\right] \in \mathbb{R}^{(m+1)\times
+n}.
+\end{gather} 
+
+Onde, $I_{m+1}$ é a matriz identidade de dimensão $(m+1)\times (m+1)$.
+ 
+Considere $\theta(t)$ a estimativa dos parâmetros $\theta^*$. O erro de
+estimação pode ser definido como:
+
+\begin{equation}
+\epsilon(t) = \theta^\intercal(t)\phi(t)-y(t) =
+\tilde{\theta}^\intercal(t)\phi(t), t\geq t_0.
+\end{equation}
+
+Neste trabalho, serão considerados dois algoritmos para a atualização
+da estimação dos parâmetros ($\theta$): método do gradiente normalizado e método
+\textit{least-square}.
+
+O algoritmo do gradiente normalizado para atualização da estimação dos
+parâmetros corresponde escolher a derivada de $\theta(t)$ na direção do
+gradiente descendente, minimizando a função custo normalizada:
+
+\begin{gather}
+J(\theta) = \frac{\epsilon^2}{2m^2} =
+\frac{\tilde{\theta}^\intercal \phi \phi^\intercal \tilde{\theta}}{2m^2},\\
+m^2 = 1+\kappa \phi^\intercal (t) \phi
+\end{gather}
+
+Derivando-se a função custo, obtém-se a lei de adaptação paramétrica:
+
+\begin{gather}
+\dot{\theta}(t) = -\frac{\Gamma \phi(t) \epsilon (t)}{m^2(t)}, \theta(t_0) =
+\theta_0, t\geq t_0,
+\end{gather}
+
+onde $\Gamma = \Gamma^\intercal > 0$ é uma matrix de ganhos. Vale observar que é
+possível provar por Lyapunov a estabilidade e convergência de $\epsilon =
+\theta^\intercal(t)\phi(t)-y(t)$ para zero. Porém, esta condição não garante
+$\tilde{\theta} = 0$, apenas garante a ortogonalidade entre os vetores dos
+parâmetros e regressor. A convergência é garantida quando há excitação
+persistente no sistema.
+
+No caso do algoritmo \textit{least-square} normalizado, a atualização
+paramétrica é dada pela equação:
+
+\begin{gather}
+\dot{\theta}(t) = -\frac{P(t) \phi(t) \epsilon (t)}{m^2(t)}, \theta(t_0) =
+\theta_0, t\geq t_0,\\
+\dot{P}(t) = -\frac{P(t) \phi(t) \phi^\intercal(t) P(t)}{m^2(t)}, P(t_0) = P_0 =
+P_0^\intercal>0,t\geq t_0,\\
+m^2(t) = 1+\kappa \phi^\intercal (t) P(t) \phi(t), \kappa > 0.
+\end{gather}
