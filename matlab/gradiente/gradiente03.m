@@ -4,30 +4,30 @@
 %
 %  Script para simular o exemplo
 %
-%  Gradiente  : n  = 1     First order plant
+%  Gradiente  : n  = 3     First order plant
 %               n* = 1     Relative degree
-%               np = 2     Adaptive parameters
+%               np = 6     Adaptive parameters
 %
 %                                                        Ramon R. Costa
 %                                                        30/abr/13, Rio
 %======================================================================
-function dx=gradiente01(t,x)
+function dx=gradiente03(t,x)
 
 global filter_param dc a w gamma thetas;
 
-theta = x(1:2);
-uf = x(3);
-yf = x(4);
+theta = x(1:6);
+uf = x(7:9);
+yf = x(10:12);
 
 %--------------------------
-r = dc + a*sin(w*t) + a*sin(2*w*t);
+r = dc + a*sin(w*t) + a*sin(2*w*t)+ a*sin(3*w*t) + a*sin(4*w*t);
 
 phi = [uf' yf']';
 y = thetas'*phi;
 
 u = r;
-duf = [u-(flip(filter_param)'*uf)]';
-dyf = [y-(flip(filter_param)'*yf)]';
+duf = [uf(2:end)' u-(flip(filter_param)'*uf)]';
+dyf = [yf(2:end)' y-(flip(filter_param)'*yf)]';
 
 
 yhat = theta'*phi;
