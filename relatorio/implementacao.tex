@@ -1,0 +1,102 @@
+\section{Implementação}
+
+O trabalho consiste em identificar dinamicamente os parâmetros do sistema para
+plantas de primeira, segunda e terceira ordem. Nesta seção, iremos descrever a
+implementação dos algoritmos do gradiente normalizado e \textit{least-square},
+em MATLAB.
+
+A primeira etapa da implementação é definir as condições iniciais, parâmetros do
+sistema a serem identificados, função de transferência da planta, filtro e sinal
+de entrada.
+
+As condições iniciais do sistema são os valores para $y(0)$ e $\theta_0$.
+Consideremos uma planta estável de terceira ordem de forma a exemplificar com o
+sistema mais geral deste trabalho:
+
+\begin{gather}
+P(s)[y](t) = Z(s)[u](t),\\
+\nonumber P(s) = (s+0.5)^3 = s^3 + 1.5 s^2 + 0.75s + 0.125,\\
+\nonumber Z(s) = (s+0.3)^3 = s^2 + 0.6 s + 0.09,\\
+\nonumber \vec{pz} = \left[z_2, z_1, z_0, p_2, p_1,p_0\right]^\intercal=
+\left[1 \quad 0.6 \quad 0.09 \quad 1.5 \quad 0.75 \quad 0.125\right]^\intercal,\\
+\nonumber u(t) = r(t) = \mathrm{dc} + \mathrm{sin}(w_1t) + \mathrm{sin}(w_2t) +
+\mathrm{sin}(w_3t).
+\end{gather}
+
+O sinal de referência deve possuir pelo menos seis frequências, pois há seis
+parâmetros desconhecidos (Seção 3.5 - Tao). Além disso, o sistema é
+dito com excitação persistente se $u(t)$ não possui frequências do regressor
+$\phi(t)$. 
+
+Considere um filtro de terceira ordem:
+
+\begin{gather}
+\Lambda(s) = (s+1)^3 = s^3+3s^2+3s+1,\\
+\nonumber \vec{\lambda} = \left[3 \quad  3 \quad  1\right]^\intercal.
+\end{gather}
+
+O vetor de parâmetros é definido como:
+
+\begin{gather}
+\theta^* =
+\left[z_0 \quad z_1 \quad z_2 \quad \lambda_0-p_0 \quad \lambda_1-p_1 \quad \lambda_{2}-p_{2}\right]^\intercal = \\
+\nonumber \theta^* = \left[\textrm{flip}(\vec{pz}(1:3))  \quad 
+\textrm{flip}(\vec{\lambda}-\vec{pz}(4:6))\right]^\intercal = \\
+\nonumber \theta^* = \left[0.09 \quad 0.6 \quad 1 \quad 0.875 \quad 2.25 \quad 1.5\right]^\intercal.\\
+\end{gather}
+
+As equações do filtro podem ser descritas como um sistema no espaço de estados:
+
+\[
+\begin{cases}
+\dot{\omega}_{11} = \omega_{12}, \\
+\dot{\omega}_{12} = \omega_{13}, \\
+\dot{\omega}_{13} = u - \textrm{flip}(\vec{\lambda})^\intercal\omega
+\end{cases}
+\]
+
+\[
+\begin{cases}
+\dot{\omega}_{21} = \omega_{22}, \\
+\dot{\omega}_{22} = \omega_{23}, \\
+\dot{\omega}_{23} = y - \textrm{flip}(\vec{\lambda})^\intercal\omega
+\end{cases}
+\]
+
+Resumidamente:
+
+\begin{gather}
+d\omega_1 = \left[\omega_1(2:3) \quad y -
+\textrm{flip}(\vec{\lambda})^\intercal \omega_1 \right]^\intercal,\\
+\nonumber d\omega_2 = \left[\omega_2(2:3) \quad y -
+\textrm{flip}(\vec{\lambda})^\intercal \omega_2 \right]^\intercal,\\
+\phi = \left[\omega_1 \quad \omega_2 \right].
+\end{gather}
+
+Podemos descrever a saída estimada e real do sistema pelos filtros:
+
+\begin{gather}
+y = \theta^{*\intercal}\phi,\\
+\hat{y} = \theta^\intercal \phi, \\
+\epsilon = \hat{y}-y = \tilde{\theta}^\intercal \phi.
+\end{gather}
+
+Finalmente, descrevemos a atualização de $\theta$, os parâmetros estimados,
+conforme o gradiente normalizado ou pelo método \textit{least-square}:
+
+\[
+\textrm{Gradiente} = 
+\begin{cases}
+m^2 \leftarrow 1 + \phi^\intercal\phi\\
+\dot{\theta} \leftarrow \frac{-\Gamma\phi\epsilon}{m^2}
+\end{cases}
+\]
+
+\[
+\textrm{Least-square} = 
+\begin{cases}
+m^2 \leftarrow 1 + \phi^\intercal P\phi\\
+\dot{\theta} \leftarrow \frac{-P\phi\epsilon}{m^2}\\
+\dot{P} \leftarrow \frac{-P\phi\phi^\intercal P}{m^2}
+\end{cases}
+\]
