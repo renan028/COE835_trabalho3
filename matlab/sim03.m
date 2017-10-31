@@ -27,14 +27,14 @@ disp('-------------------------------')
 
 global filter_param dc a w gamma thetas;
 
-plant_param = [1 3/5 9/100 3/2 3/4 1/8]';
+plant_param = [1 3/5 9/100 3/2 3/4 1/8]'; %% first zeros, then poles
 filter_param = [3 3 1]';
 
 dc = 1;
 a  = 5;
 w  = 1;
 
-gamma = 20*eye(6);
+gamma = 1000*eye(6);
 
 uf0 = [0 0 0]';
 yf0 = [0 0 0]';
@@ -45,7 +45,7 @@ thetas = [plant_param(1:3)' (filter_param-plant_param(4:6))']';
 
 %-----------------------
 clf;
-tf = 30;
+tf = 100;
 
 init = [theta0' uf0' yf0']';
 

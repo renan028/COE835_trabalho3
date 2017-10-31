@@ -23,7 +23,7 @@ yf = x(10:12);
 r = dc + a*sin(w*t) + a*sin(2*w*t)+ a*sin(3*w*t) + a*sin(4*w*t);
 
 phi = [uf' yf']';
-y = thetas'*phi;
+y = thetas'*phi; %% saida real
 
 u = r;
 duf = [uf(2:3)' u-(flip(filter_param)'*uf)]';

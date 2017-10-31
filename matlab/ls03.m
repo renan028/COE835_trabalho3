@@ -31,7 +31,6 @@ u = r;
 duf = [uf(2:3)' u-(flip(filter_param)'*uf)]';
 dyf = [yf(2:3)' y-(flip(filter_param)'*yf)]';
 
-
 yhat = theta'*phi;
 
 epsilon = yhat - y;

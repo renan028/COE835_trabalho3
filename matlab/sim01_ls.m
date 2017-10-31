@@ -25,7 +25,7 @@ disp('Algoritmo: Gradiente')
 disp(' ')
 disp('-------------------------------')
 
-global filter_param dc a w thetas;
+global filter_param ref_dc ref_ampl ref_w thetas;
 
 P0 = eye(2);
 p0 = reshape(P0,length(P0)^2,1);
@@ -33,24 +33,24 @@ p0 = reshape(P0,length(P0)^2,1);
 plant_param = [1 2]';
 filter_param = [1]';
 
-dc = 1;
-a  = 5;
-w  = 1;
+ref_dc = 1;
+ref_ampl  = 5;
+ref_w  = 1;
 
-uf0 = [0]';
-yf0 = [0]';
+uf0 = 0;
+yf0 = 0;
 theta0 = zeros(2,1);
 
 %-----------------------
-thetas = [plant_param(1)' (filter_param-plant_param(2))']'; 
+thetas = [ plant_param(1)' (filter_param-plant_param(2))' ]'; 
 
 %-----------------------
 clf;
-tf = 200;
+tf = 1000;
 
-init = [theta0' uf0' yf0' p0'];
+init = [theta0' uf0' yf0' p0']';
 
-options = odeset('OutputFcn','odeplot');
+options = odeset();
 [T,X] = ode23s('ls01',tf,init,options);
 
 theta = X(:,1:2)';
@@ -63,21 +63,22 @@ y = thetas.'*phi;
 yhat = dot(theta, phi);
 
 epsilon = yhat - y;
-r = dc + a*sin(w.*T);
+r = ref_dc + ref_ampl*sin(ref_w.*T);
 modtt = sqrt(sum(theta'.^2,2))';
-
 
 figure(1)
 clf
 thetas = thetas.* ones(2,length(T));
-plot(T,theta,T,thetas);grid;shg
-legend('\theta','\theta_s','Location','SouthEast')
+err_theta = theta - thetas;
+plot(T,err_theta);grid;shg
+leg1 = legend('\tilde{\theta}');
+set(leg1,'Interpreter','latex');
 print -depsc2 ls01theta
 
 figure(2)
 clf
 plot(T,modtt);grid;shg
-legend('|\theta|','Location','SouthEast')
+leg2 = legend('|\theta|','Location','SouthEast')
 print -depsc2 ls01modtt
 
 figure(3)
@@ -85,6 +86,3 @@ clf
 plot(T,epsilon);grid;shg
 legend('\epsilon','Location','SouthEast')
 print -depsc2 ls01eps
-
-%---------------------------------------------------------------------
-

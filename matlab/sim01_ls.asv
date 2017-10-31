@@ -4,9 +4,9 @@
 %
 %  Script para simular exemplo 
 %
-%  Least-square  : n  = 2     Second order plant
+%  Least-square  : n  = 1     First order plant
 %                  n* = 1     Relative degree
-%                  np = 4     Adaptive parameters
+%                  np = 2     Adaptive parameters
 %
 %                                                        Ramon R. Costa
 %                                                        30/abr/13, Rio
@@ -25,37 +25,37 @@ disp('Algoritmo: Gradiente')
 disp(' ')
 disp('-------------------------------')
 
-global filter_param dc a w thetas;
+global filter_param ref_dc ref_ampl ref_w thetas;
 
-P0 = 100*eye(4);
+P0 = eye(2);
 p0 = reshape(P0,length(P0)^2,1);
 
-plant_param = [1 1 4 4]';
-filter_param = [2 1]';
+plant_param = [1 2]';
+filter_param = [1]';
 
-dc = 1;
-a  = 5;
-w  = 1;
+ref_dc = 1;
+ref_ampl  = 5;
+ref_w  = 1;
 
-uf0 = [0 0]';
-yf0 = [0 0]';
-theta0 = zeros(4,1);
+uf0 = 0;
+yf0 = 0;
+theta0 = zeros(2,1);
 
 %-----------------------
-thetas = [flip(plant_param(1:2))' flip((filter_param-plant_param(3:4)))']'; 
+thetas = [ plant_param(1)' (filter_param-plant_param(2))' ]'; 
 
 %-----------------------
 clf;
-tf = 5000;
+tf = 200;
 
-init = [theta0' uf0' yf0' p0'];
+init = [theta0' uf0' yf0' p0']';
 
-options = odeset();
-[T,X] = ode23s('ls02',tf,init,options);
+options = odeset('OutputFcn','odeplot');
+[T,X] = ode23s('ls01',tf,init,options);
 
-theta = X(:,1:4)';
-uf = X(:,5:6)';
-yf = X(:,7:8)';
+theta = X(:,1:2)';
+uf = X(:,3)';
+yf = X(:,4)';
 
 phi = [uf' yf']';
 y = thetas.'*phi;
@@ -63,21 +63,15 @@ y = thetas.'*phi;
 yhat = dot(theta, phi);
 
 epsilon = yhat - y;
-freq1 = randn; freq2 = randn;
-freq3 = randn; freq4 = randn;
-r = dc;
-% r = dc + a*sin(w.*T);
-% r = dc + a*sin(freq1*w.*T) + a*sin(freq2*w.*T);
-% r = dc + a*sin(freq1*w.*T) + a*sin(freq2*w.*T) + a*sin(freq3*w.*T) +  a*sin(freq4*w.*T);
+r = ref_dc + ref_ampl*sin(ref_w.*T);
 modtt = sqrt(sum(theta'.^2,2))';
 
 figure(1)
 clf
-thetas = thetas.* ones(4,length(T));
-err_theta = theta - thetas;
-plot(T,err_theta);grid;shg
-leg1 = legend('\tilde{\theta}');
-set(leg1,'Interpreter','latex');
+thetas = thetas.* ones(2,length(T));
+err_theta = thetas - 
+plot(T,theta,T,thetas);grid;shg
+legend('\theta','\theta_s','Location','SouthEast')
 print -depsc2 ls01theta
 
 figure(2)
@@ -91,6 +85,3 @@ clf
 plot(T,epsilon);grid;shg
 legend('\epsilon','Location','SouthEast')
 print -depsc2 ls01eps
-
-%---------------------------------------------------------------------
-

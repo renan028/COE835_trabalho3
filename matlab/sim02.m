@@ -27,14 +27,16 @@ disp('-------------------------------')
 
 global filter_param dc a w gamma thetas;
 
-plant_param = [1 1 4 4]';
-filter_param = [2 1]';
+% plant_param = [1 1 4 4]';
+% filter_param = [2 1]';
+plant_param = [1.5 3 2 3]';
+filter_param = [1 1]';
 
 dc = 1;
 a  = 2;
 w  = 1;
 
-gamma = 10*eye(4);
+gamma = 100*eye(4);
 
 uf0 = [0 0]';
 yf0 = [0 0]';
@@ -45,11 +47,11 @@ thetas = [plant_param(1:2)' (filter_param-plant_param(3:4))']';
 
 %-----------------------
 clf;
-tf = 100;
+tf = 5000;
 
 init = [theta0' uf0' yf0']';
 
-options = odeset('OutputFcn','odeplot');
+options = odeset();
 [T,X] = ode23s('gradiente02',tf,init,options);
 
 theta = X(:,1:4)';
@@ -62,15 +64,17 @@ y = thetas.'*phi;
 yhat = dot(theta, phi);
 
 epsilon = yhat - y;
-r = dc + a*sin(w.*T) + a*sin(2*w.*T)+ a*sin(3*w.*T) + a*sin(10*w.*T);
+r = dc + 1*sin(T) + 2*sin(2*T);
+% r = dc + a*sin(w.*T) + a*sin(2*w.*T)+ a*sin(3*w.*T) + a*sin(10*w.*T);
 modtt = sqrt(sum(theta'.^2,2))';
 
 
 figure(1)
 clf
 thetas = thetas.* ones(4,length(T));
-plot(T,theta,T,thetas);grid;shg
-legend('\theta','\theta_s','Location','SouthEast')
+err_theta = theta - thetas;
+plot(T,err_theta);grid;shg
+legend('\tilde{\theta}','Location','SouthEast')
 print -depsc2 gradiente02theta
 
 figure(2)

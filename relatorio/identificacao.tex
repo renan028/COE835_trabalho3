@@ -12,27 +12,26 @@ on-line ao mesmo tempo em que o sistema está em operação.
 
 Considere um sistema linear invariante no tempo descrito pela equação
 diferencial (Eq. \ref{eq:planta}):
-
+%
 \begin{equation}
 P(s)[y](t) = Z(s)[u](t),
 \label{eq:planta}
 \end{equation}
-
+%
 onde $y(t) \in \mathbb{R}$ e $u(t) \in \mathbb{R}$ são os sinais medidos de
-saída e entrada do sistema;
-
+saída e entrada do sistema e
+%
 \begin{gather}
 P(s) = s^n + p_{n-1}s^{n-1}+\ldots + p_1s+p_0,\\
 Z(s) = z_ms^m + z_{m-1}s^{m-1}+\ldots + z_1s+z_0
 \label{eq:poly}
 \end{gather}
-
+%
 são os polinômios em $s$, $s$ sendo o operador de diferencial
 $s[x](t)=\dot{x}(t)$; e $p_i, i = 0,1,\ldots,n-1$, $z_i, i=0,1,\ldots,m$ com
 $n>m$, são os parâmetros desconhecidos da planta.
 
-Escolhe-se um polinômio estável $\Lambda(s) =
-s^n+\lambda_{n-1}s^{n-1}+\ldots+\lambda_1s+\lambda_0$. Multiplicando ambos os
+Escolhe-se um polinômio estável $\Lambda(s) = s^n+\lambda_{n-1}s^{n-1}+\ldots+\lambda_1s+\lambda_0$. Multiplicando ambos os
 lados da equação \ref{eq:planta} pelo filtro $\frac{1}{\Lambda(s)}$, temos:
  
 \begin{equation}
@@ -44,7 +43,7 @@ Introduzindo o vetor de parâmetros e regressor:
 
 \begin{equation}
 \theta* =
-\left[z_0,z_1,\ldots,z_{m-1},z_m,\lambda_0-p_0,\lambda_1-p_1,\ldots,\lambda_{n-2}-p_{n-2},\lambda{n-1}-p_{n-1}\right]^\intercal
+\left[z_0,z_1,\ldots,z_{m-1},z_m,\lambda_0-p_0,\lambda_1-p_1,\ldots,\lambda_{n-2}-p_{n-2},\lambda_{n-1}-p_{n-1}\right]^\intercal
 \in \mathbb{R}^{n+m+1},
 \label{eq:parameters}
 \end{equation}
@@ -71,7 +70,7 @@ A implementação do filtro é realizada pela construção de dois sistemas
 dinâmicos, na realização de estados:
 
 \begin{gather}
-\dot{\omega}(t) = A_\lambda\omega_1(t)+bu(t)\\
+\dot{\omega}_1(t) = A_\lambda\omega_1(t)+bu(t)\\
 \dot{\omega}_2(t) = A_\lambda\omega_2(t)+by(t),
 \label{eq:statespace}
 \end{gather}

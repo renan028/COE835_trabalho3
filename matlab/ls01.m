@@ -11,9 +11,9 @@
 %                                                        Ramon R. Costa
 %                                                        30/abr/13, Rio
 %======================================================================
-function dx=ls01(t,x)
+function dx = ls01(t,x)
 
-global filter_param dc a w thetas;
+global filter_param ref_dc ref_ampl ref_w thetas;
 
 theta = x(1:2);
 uf = x(3);
@@ -22,15 +22,14 @@ p = x(5:end);
 P = reshape(p,sqrt(length(p)),sqrt(length(p)));
 
 %--------------------------
-r = dc + a*sin(w*t) + a*sin(2*w*t);
+r = ref_dc + ref_ampl*sin(ref_w*t) + ref_ampl*sin(2*ref_w*t);
 
 phi = [uf' yf']';
 y = thetas'*phi;
 
 u = r;
-duf = [u-(flip(filter_param)'*uf)]';
-dyf = [y-(flip(filter_param)'*yf)]';
-
+duf = [ u - flip(filter_param)'*uf ]';
+dyf = [ y - flip(filter_param)'*yf ]';
 
 yhat = theta'*phi;
 
