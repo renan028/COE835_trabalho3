@@ -1,3 +1,11 @@
+/.project
+/relatorio/*.log
+/relatorio/*.aux
+/relatorio/*.out
+/relatorio/*.gz
+/relatorio/*.toc
+/relatorio/*.pdf
+
 *~
 *.backup
 *.pdf
