@@ -1,5 +1,7 @@
 %-------- Print eps plots -----
 
+close all;
+
 %Set matlab interpreter to latex
 set(groot, 'defaultAxesTickLabelInterpreter','latex');
 set(groot, 'defaultLegendInterpreter','latex');
@@ -11,6 +13,7 @@ fig_ypos = 250;
 fig_width = 600;
 fig_height = 250;
 fig_pos = [fig_xpos fig_ypos fig_width fig_height];
+pos_pct = .075;
 
 switch changed
     case 1
@@ -77,11 +80,11 @@ path_epsilon = strcat('../../relatorio/figs/gradiente/epsilon/',sim_str,file_nam
 figure(1);clf;
 set(gcf,'position',[fig_pos(1:2) fig_pos(3) 2*fig_pos(4)]);
 
-subplot(211);
+h1 = subplot(211);
 plot(T_1,tiltheta_1);grid on;
 title(strcat('$\tilde{\theta}$ com~ ', str1));
 
-subplot(212);
+h2 = subplot(212);
 plot(T_2,tiltheta_2);grid on;
 title(strcat('$\tilde{\theta}$ com~ ', str2));
 
@@ -102,6 +105,9 @@ switch(N)
         subplot(212);
         legend('$\tilde{\theta}_1$','$\tilde{\theta}_2$','$\tilde{\theta}_3$','$\tilde{\theta}_4$','$\tilde{\theta}_5$','$\tilde{\theta}_6$','Location','SouthEast')
 end
+
+%Reduce gap btw subplots
+set(h2,'Position',[h2.Position(1), h2.Position(2) + pos_pct*(h1.Position(2) - h2.Position(2)), h2.Position(3), h2.Position(4)]);
 
 if PRINT
     print(path_tiltheta,'-depsc2')
