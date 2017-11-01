@@ -27,8 +27,13 @@ de excitação.
 %
 \begin{align*}
   y &= \frac{1}{s+2}u\,,  &  \Lambda &= \frac{1}{s+1}\,, & \theta(0) &= 0\,, \\
-  \gamma &= 5 \, \textbf{I}_2\,, & r &= \HI{1} \,\, \text{e} \,\, \HI{1+5\textrm{sin}(t)}\, \,.
+  \gamma &= 10 \, \textbf{I}_2\,, & r &= \HI{1+5\textrm{sin}(t)} \,\, \text{e} \,\, \HI{1} \,.
 \end{align*}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim01_r1r2.eps} 
+\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -37,26 +42,26 @@ de excitação.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim01_r1r2.eps} 
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
   \includegraphics[width=12cm]{figs/gradiente/epsilon/sim01_r1r2.eps} 
 \end{figure}
 
-\newpage%
+\bigskip
+% \newpage%
 
 \textbf{\underline{Simulação 1.2}: sistema de 2$^\text{a}$ ordem}
 %
 \begin{align*}
   y &= \frac{s+1}{s+4s+4}u\,,  &  \Lambda &= \frac{1}{s^2+2s+1}\,, & \theta(0)
-  &= 0\,,\\
-  \gamma &= 10\, \textbf{I}_4 \,, & r &= \HI{10\textrm{sin}(0.63493t)}
+  &= \mathbf{0}\,,\\
+  \gamma &= 10\, \textbf{I}_4 \,, & r &= \HI{10\textrm{sin}(0.63493t)+25\textrm{sin}(4.5669t)}
   \,\, \text{e} \,\,
-  \HI{30\textrm{sin}(0.63493t)+25\textrm{sin}(4.5669t)}\, \,.
+  \HI{10\textrm{sin}(0.63493t)} \,.
 \end{align*}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim02_r1r2.eps} 
+\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -65,15 +70,10 @@ de excitação.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim02_r1r2.eps} 
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
   \includegraphics[width=12cm]{figs/gradiente/epsilon/sim02_r1r2.eps} 
 \end{figure}
 
+\bigskip
 % \newpage%
 
 \textbf{\underline{Simulação 1.3}: sistema de 3$^\text{a}$ ordem}
@@ -81,22 +81,19 @@ de excitação.
 \begin{align*}
   y &= \frac{s+s+1}{s^2+s^2+s+1}u\,,  &  \Lambda &=
   \frac{1}{s^3+3s^2+3s+1}\,, \\
-  \gamma &= 10 \, \textbf{I}_6 \,, & \theta(0) &= 0\,, \\
-  r &=   \HI{10\textrm{sin}(0.53326t)+10\textrm{sin}(4.8095t)} & r &=
-  \HI{10\textrm{sin}(0.53326t)+10\textrm{sin}(4.8095t)+10\textrm{sin}(0.023171t)}\,
-  \,.
+  \gamma &= 10 \, \textbf{I}_6 \,, & \theta(0) &= \mathbf{0}\,, \\
+  r &= \HI{10\textrm{sin}(0.53326t)+10\textrm{sin}(4.8095t)+10\textrm{sin}(0.023171t)} & r &= \HI{10\textrm{sin}(0.53326t)+10\textrm{sin}(4.8095t)}\,\,.
 \end{align*}
- 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim03_r1r2.eps} \\[2mm]
-\end{figure}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim03_r1r2.eps} 
 \end{figure}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim03_r1r2.eps} \\[2mm]
+\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -115,78 +112,80 @@ ganho de adaptação.
 %
 \begin{align*}
   y &= \frac{1}{s+2}u\,,  &  \Lambda &= \frac{1}{s+1}\,, & \theta(0) &= 0\,, \\
-  \gamma &= \HI{5\,$\textbf{I}_2$ , 10\,$\textbf{I}_2$}\,, & r &= 1+5\textrm{sin}(t)\, \,.
+  \gamma &= \HI{10\,$\textbf{I}_2$ , 5\,$\textbf{I}_2$}\,, & r &= 1+5\textrm{sin}(t)\, \,.
 \end{align*}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim01_gamma5gamma10.eps} \\[2mm]
+  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim01_gamma10gamma5.eps} 
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim01_gamma5gamma10.eps} 
+  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim01_gamma10gamma5.eps} \\[2mm]
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/epsilon/sim01_gamma5gamma10.eps} 
+  \includegraphics[width=12cm]{figs/gradiente/epsilon/sim01_gamma10gamma5.eps} 
 \end{figure}
 
+\bigskip
 % \newpage%
 
 \textbf{\underline{Simulação 2.2}: sistema de 2$^\text{a}$ ordem}
 %
 \begin{align*}
   y &= \frac{s+1}{s+4s+4}u\,,  &  \Lambda &= \frac{1}{s^2+2s+1}\,, & \theta(0)
-  &= 0\,,\\
-  \gamma &= \HI{1\,$\textbf{I}_4$ , 10\,$\textbf{I}_4$}\,, & r &=
+  &= \mathbf{0}\,,\\
+  \gamma &= \HI{10\,$\textbf{I}_4$ , 5\,$\textbf{I}_4$}\,, & r &=
   30\textrm{sin}(0.63493t)+25\textrm{sin}(4.5669t) \,.
 \end{align*}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim02_gamma1gamma10.eps}
+  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim02_gamma10gamma5.eps} 
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim02_gamma10gamma5.eps}
   \\[2mm]
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim02_gamma1gamma10.eps} 
+  \includegraphics[width=12cm]{figs/gradiente/epsilon/sim02_gamma10gamma5.eps} 
 \end{figure}
 
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=12cm]{figs/gradiente/epsilon/sim02_gamma1gamma10.eps} 
-\end{figure}
-
+\bigskip
 % \newpage%
 
 \textbf{\underline{Simulação 2.3}: sistema de 3$^\text{a}$ ordem}
 %
 \begin{align*}
   y &= \frac{s+s+1}{s^2+s^2+s+1}u\,,  &  \Lambda &=
-  \frac{1}{s^3+3s^2+3s+1}\,, & \theta(0) &= 0\,,\\
-  \gamma &= \HI{1\,$\textbf{I}_6$ , 10\,$\textbf{I}_6$}\,, & r
+  \frac{1}{s^3+3s^2+3s+1}\,, & \theta(0) &= \mathbf{0}\bigskip\,,\\
+  \gamma &= \HI{10\,$\textbf{I}_6$ , 5\,$\textbf{I}_6$}\,, & r
   &=10\textrm{sin}(0.53326t)+10\textrm{sin}(4.8095t)+10\textrm{sin}(0.023171t) \,.
 \end{align*}
 
 \bigskip%
+% \newpage%
+
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim03_r1r2.eps} \\[2mm]
+  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim03_gamma10gamma5.eps} 
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim03_r1r2.eps} 
+  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim03_gamma10gamma5.eps} \\[2mm]
 \end{figure}
-
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/epsilon/sim03_r1r2.eps} 
+  \includegraphics[width=12cm]{figs/gradiente/epsilon/sim03_gamma10gamma5.eps} 
 \end{figure}
 
 %---------------------------------------------------------------------
@@ -200,9 +199,14 @@ condições iniciais do parâmetro de estimção $\theta$.
 \textbf{\underline{Simulação 3.1}: sistema de 1$^\text{a}$ ordem}
 %
 \begin{align*}
-  y &= \frac{1}{s+2}u\,,  &  \Lambda &= \frac{1}{s+1}\,, & \theta(0) &= \HI{0}\,, \\
-  \gamma &= 5 \,\textbf{I}_2\,, & r &= 1+5\textrm{sin}(t) \,.
+  y &= \frac{1}{s+2}u\,,  &  \Lambda &= \frac{1}{s+1}\,, & \theta(0) &= \HI{$\mathbf{0}$ \,, $\mathbf{1}$} \,, \\
+  \gamma &= 10 \,\textbf{I}_2\,, & r &= 1+5\textrm{sin}(t) \,.
 \end{align*}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim01_theta01theta02.eps} 
+\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -212,25 +216,25 @@ condições iniciais do parâmetro de estimção $\theta$.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim01_theta01theta02.eps} 
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
   \includegraphics[width=12cm]{figs/gradiente/epsilon/sim01_theta01theta02.eps} 
 \end{figure}
 
+\bigskip
 % \newpage%
 
 \textbf{\underline{Simulação 3.2}: sistema de 2$^\text{a}$ ordem}
 %
 \begin{align*}
   y &= \frac{s+1}{s+4s+4}u\,,  &  \Lambda &= \frac{1}{s^2+2s+1}\,, & \theta(0)
-  &= 10 \\
+  &= \HI{$\mathbf{0}$ \,, $\mathbf{1}$} \,, \\
   %
   \gamma &= 10\,\textbf{I}_4\,, & r &= 30\textrm{sin}(0.63493t)+25\textrm{sin}(4.5669t)\,.
 \end{align*}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim02_theta01theta02.eps} 
+\end{figure}
 
 \bigskip%
 \begin{figure}[H]
@@ -241,36 +245,31 @@ condições iniciais do parâmetro de estimção $\theta$.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim02_theta01theta02.eps} 
-\end{figure}
-
-\begin{figure}[H]
-  \centering
   \includegraphics[width=12cm]{figs/gradiente/epsilon/sim02_theta01theta02.eps} 
 \end{figure}
 
+\bigskip
 % \newpage%
 
 \textbf{\underline{Simulação 3.3}: sistema de 3$^\text{a}$ ordem}
 %
 \begin{align*}
   y &= \frac{s+1s+1}{s^2+s^2+s+1}u\,,  &  \Lambda &=
-  \frac{1}{s^3+3s^2+3s+1}\,, & \theta(0) &= \HI{0, 1}\,,\\
+  \frac{1}{s^3+3s^2+3s+1}\,, & \theta(0) &= \HI{$\mathbf{0}$ \,, $\mathbf{1}$} \,, \\
   \gamma &= 10 \,\textbf{I}_6\,, & r
   &=10\textrm{sin}(0.53326t)+10\textrm{sin}(4.8095t)+10\textrm{sin}(0.023171t) \, \,.
 \end{align*}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim03_theta01theta02.eps}
-  \\[2mm]
+  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim03_theta01theta02.eps} 
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim03_theta01theta02.eps} 
+  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim03_theta01theta02.eps}
+  \\[2mm]
 \end{figure}
-
  
 \begin{figure}[H]
   \centering

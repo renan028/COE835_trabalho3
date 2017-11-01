@@ -16,9 +16,9 @@ thetas = [flip(plant_param(1:N))' (flip(filter_param-plant_param(N+1:end)))']';
 %First set
 dc_1 = 1;
 W_1 = 1;
-A_1 = 0;
+A_1 = 5;
 
-gamma_1 = 5;
+gamma_1 = 10;
 
 uf0_1 = zeros(N,1);
 yf0_1 = zeros(N,1);
@@ -27,9 +27,9 @@ theta0_1 = zeros(2*N,1);
 %Second set
 dc_2 = 1;
 W_2 = 1;
-A_2 = 5;
+A_2 = 0;
 
-gamma_2 = 10;
+gamma_2 = 5;
 
 uf0_2 = ones(N,1);
 yf0_2 = ones(N,1);
@@ -51,9 +51,9 @@ dc_1 = 0;
 W_1 = [0.63493 4.5669];
 A_1 = zeros(1,length(W_1));
 A_1(1) = 10;
-A_1(2) = 0;
+A_1(2) = 25;
 
-gamma_1 = 1;
+gamma_1 = 10;
 
 uf0_1 = zeros(N,1);
 yf0_1 = zeros(N,1);
@@ -63,10 +63,10 @@ theta0_1 = zeros(2*N,1);
 dc_2 = 0;
 W_2 = W_1;
 A_2 = zeros(1,length(W_2));
-A_2(1) = 30;
-A_2(2) = 25;
+A_2(1) = 10;
+A_2(2) = 0;
 
-gamma_2 = 10;
+gamma_2 = 5;
 
 uf0_2 = ones(N,1);
 yf0_2 = ones(N,1);
@@ -89,7 +89,7 @@ W_1 = [0.53326 4.8095 0.023171];
 A_1 = zeros(1,length(W_1));
 A_1(1) = 10;
 A_1(2) = 10;
-A_2(3) = 10;
+A_1(3) = 10;
 
 gamma_1 = 10;
 
@@ -104,11 +104,10 @@ W_2 = W_1;
 A_2 = zeros(1,length(W_2));
 A_2(1) = 10;
 A_2(2) = 10;
-A_2(3) = 10;
 %A_2(4) = 18;
 %A_2(5) = 16;
 
-gamma_2 = 20;
+gamma_2 = 5;
 
 uf0_2 = ones(N,1);
 yf0_2 = ones(N,1);
