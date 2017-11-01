@@ -13,7 +13,7 @@
 %======================================================================
 function dx=ls02(t,x)
 
-global filter_param dc a w thetas;
+global filter_param dc A W thetas;
 
 theta = x(1:4);
 uf = x(5:6);
@@ -22,14 +22,17 @@ p = x(9:end);
 P = reshape(p,sqrt(length(p)),sqrt(length(p)));
 
 %--------------------------
-r = dc + a*sin(w*t) + a*sin(2*w*t)+ a*sin(3*w*t) + a*sin(4*w*t);
+r = dc;
+for i=1:length(A)
+    r = r + A(i)*sin(W(i)*t);
+end
 
 phi = [uf' yf']';
 y = thetas'*phi;
 
 u = r;
-duf = [uf(2)' u-(flip(filter_param)'*uf)]';
-dyf = [yf(2)' y-(flip(filter_param)'*yf)]';
+duf = [uf(2:end)' u-(flip(filter_param)'*uf)]';
+dyf = [yf(2:end)' y-(flip(filter_param)'*yf)]';
 
 
 yhat = theta'*phi;
