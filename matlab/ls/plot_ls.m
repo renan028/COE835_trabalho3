@@ -6,21 +6,25 @@ set(groot, 'defaultTextInterpreter','latex');
 
 switch changed
     case 1
-        str1 = strcat('$p_0=',num2str(gain_P0_1),'$');
-        str2 = strcat('$p_0=',num2str(gain_P0_2),'$');
+        str1 = strcat('$P_0=',num2str(gain_P0_1),'$');
+        str2 = strcat('$P_0=',num2str(gain_P0_2),'$');
         file_name = strcat('p',num2str(gain_P0_1),'p',num2str(gain_P0_2));
         
     case 2
         str1 = '$r(t)=';
         str2 = '$r(t)=';
         if dc_1~=0
-            str1 = strcat(str1,num2str(dc_1),'+');
+            str1 = strcat(str1,num2str(dc_1));
+            plus_str1 = '+';
+        else
+            plus_str1 = '';
         end
         if dc_2~=0
-            str2 = strcat(str2,num2str(dc_2),'+');
+            str2 = strcat(str2,num2str(dc_2));
+            plus_str2 = '+';
+        else
+            plus_str2 = '';
         end
-        plus_str1 = '';
-        plus_str2 = '';
         for i=1:length(A)
             if A_1(i)~=0
                 str1 = strcat(str1,plus_str1,num2str(A_1(i)),'sin(',num2str(W_1(i)),'t)');

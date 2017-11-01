@@ -87,44 +87,14 @@ end
 % plot_gradiente;
 
 %---------------------Simulation 3 (r)
-% changed = 2;
-% 
-% theta0 = theta0_1;
-% uf0 = uf0_1;
-% yf0 = yf0_1;
-% dc = dc_2;
-% A = A_2;
-% W = W_2;
-% gamma = gamma_1*eye(2*N);
-% 
-% init = [theta0' uf0' yf0']';
-% [T_2,X_2] = ode23s('gradiente02',tf,init,options);
-% 
-% theta_2 = X_2(:,1:4)';
-% tiltheta_2 = theta_2 - thetas.*ones(2*N,length(theta_2));
-% uf_2 = X_2(:,5:6)';
-% yf_2 = X_2(:,7:8)';
-% phi_2 = [uf_2' yf_2']';
-% y_2 = thetas.'*phi_2;
-% yhat_2 = dot(theta_2, phi_2);
-% epsilon_2 = yhat_2 - y_2;
-% modtt_2 = sqrt(sum(theta_2'.^2,2))';
-% r_2 = dc;
-% for i=1:length(A)
-%     r_2 = r_2 + A(i)*sin(W(i)*T_2);
-% end
-% 
-% plot_gradiente;
+changed = 2;
 
-%---------------------Simulation 4 (theta0)
-changed = 3;
-
-theta0 = theta0_2;
+theta0 = theta0_1;
 uf0 = uf0_1;
 yf0 = yf0_1;
-dc = dc_1;
-A = A_1;
-W = W_1;
+dc = dc_2;
+A = A_2;
+W = W_2;
 gamma = gamma_1*eye(2*N);
 
 init = [theta0' uf0' yf0']';
@@ -145,6 +115,36 @@ for i=1:length(A)
 end
 
 plot_gradiente;
+
+%---------------------Simulation 4 (theta0)
+% changed = 3;
+% 
+% theta0 = theta0_2;
+% uf0 = uf0_1;
+% yf0 = yf0_1;
+% dc = dc_1;
+% A = A_1;
+% W = W_1;
+% gamma = gamma_1*eye(2*N);
+% 
+% init = [theta0' uf0' yf0']';
+% [T_2,X_2] = ode23s('gradiente02',tf,init,options);
+% 
+% theta_2 = X_2(:,1:4)';
+% tiltheta_2 = theta_2 - thetas.*ones(2*N,length(theta_2));
+% uf_2 = X_2(:,5:6)';
+% yf_2 = X_2(:,7:8)';
+% phi_2 = [uf_2' yf_2']';
+% y_2 = thetas.'*phi_2;
+% yhat_2 = dot(theta_2, phi_2);
+% epsilon_2 = yhat_2 - y_2;
+% modtt_2 = sqrt(sum(theta_2'.^2,2))';
+% r_2 = dc;
+% for i=1:length(A)
+%     r_2 = r_2 + A(i)*sin(W(i)*T_2);
+% end
+% 
+% plot_gradiente;
 
 %------------------------------------------------
 

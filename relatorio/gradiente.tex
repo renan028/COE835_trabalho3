@@ -1,3 +1,8 @@
+%---------------------------------------------------------------------
+\section{Resultados das simulações}
+
+%Simulação utilizando \HI{\texttt{Matlab/Simulink}}.
+
 \subsection{Gradiente Normalizado}
 
 Nas simulações, procuramos avaliar o comportamento do sistema para as seguintes condições:
@@ -46,8 +51,8 @@ de excitação.
 \begin{align*}
   y &= \frac{s+1}{s+4s+4}u\,,  &  \Lambda &= \frac{1}{s^2+2s+1}\,, & \theta(0)
   &= 0\,,\\
-  \gamma &= 10\,, & r &= \HI{$10\textrm{sin}(0.63493t)$} e
-  \HI{$30\textrm{sin}(0.63493t)+25\textrm{sin}(4.5669t)$}\, \,.
+  \gamma &= 10\,, & r &= \HI{10\textrm{sin}(0.63493t)} e
+  \HI{30\textrm{sin}(0.63493t)+25\textrm{sin}(4.5669t)}\, \,.
 \end{align*}
 
 \bigskip%
@@ -70,11 +75,15 @@ de excitação.
 \newpage%
 
 \begin{align*}
-  y &= \frac{s+2s+1}{s^2+6s^2+12s+8}u\,,  &  \Lambda &=
+  y &= \frac{s+s+1}{s^2+s^2+s+1}u\,,  &  \Lambda &=
   \frac{1}{s^3+3s^2+3s+1}\,, & \theta(0) &= 0\,,\\
-  \gamma &= 10\,, & r &= \, \,.
+  \gamma &= 10\,, & r &=
+  \HI{10\textrm{sin}(0.53326t)+10\textrm{sin}(4.8095t)} \,\\
+  r
+  &=\HI{10\textrm{sin}(0.53326t)+10\textrm{sin}(4.8095t)+10\textrm{sin}(0.023171t)}\,
+  \,.
 \end{align*}
-
+ 
 \bigskip%
 \begin{figure}[H]
   \centering
@@ -147,11 +156,12 @@ ganho de adaptação.
 \end{figure}
 
 \newpage%
-
+ 
 \begin{align*}
-  y &= \frac{s+2s+1}{s^2+6s^2+12s+8}u\,,  &  \Lambda &=
+  y &= \frac{s+s+1}{s^2+s^2+s+1}u\,,  &  \Lambda &=
   \frac{1}{s^3+3s^2+3s+1}\,, & \theta(0) &= 0\,,\\
-  \gamma &= 10\,, & r &=  \,.
+  \gamma &= \HI{1,10}\,, & r
+  &=\HI{10\textrm{sin}(0.53326t)+10\textrm{sin}(4.8095t)+10\textrm{sin}(0.023171t)}  \,.
 \end{align*}
 
 \bigskip%
@@ -228,25 +238,27 @@ condições iniciais do parâmetro de estimção $\theta$.
 \newpage%
 
 \begin{align*}
-  y &= \frac{s+2s+1}{s^2+6s^2+12s+8}u\,,  &  \Lambda &=
-  \frac{1}{s^3+3s^2+3s+1}\,, & \theta(0) &= 0\,,\\
-  \gamma &= 10\,, & r &= \, \,.
+  y &= \frac{s+1s+1}{s^2+s^2+s+1}u\,,  &  \Lambda &=
+  \frac{1}{s^3+3s^2+3s+1}\,, & \theta(0) &= \HI{0, 1}\,,\\
+  \gamma &= 10\,, & r
+  &=\HI{10\textrm{sin}(0.53326t)+10\textrm{sin}(4.8095t)+10\textrm{sin}(0.023171t)} \, \,.
 \end{align*}
 
 \bigskip%
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim03_r1r2.eps} \\[2mm]
+  \includegraphics[width=12cm]{figs/gradiente/modtheta/sim03_theta01theta02.eps}
+  \\[2mm]
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim03_r1r2.eps} 
+  \includegraphics[width=12cm]{figs/gradiente/tiltheta/sim03_theta01theta02.eps} 
 \end{figure}
 
-
+ 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{figs/gradiente/epsilon/sim03_r1r2.eps} 
+  \includegraphics[width=12cm]{figs/gradiente/epsilon/sim03_theta01theta02.eps} 
 \end{figure}
 %---------------------------------------------------------------------
