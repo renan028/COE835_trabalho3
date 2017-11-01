@@ -53,7 +53,7 @@ A_1 = zeros(1,length(W_1));
 A_1(1) = 10;
 A_1(2) = 0;
 
-gamma_1 = 10;
+gamma_1 = 1;
 
 uf0_1 = zeros(N,1);
 yf0_1 = zeros(N,1);
@@ -63,7 +63,7 @@ theta0_1 = zeros(2*N,1);
 dc_2 = 0;
 W_2 = W_1;
 A_2 = zeros(1,length(W_2));
-A_2(1) = 10;
+A_2(1) = 30;
 A_2(2) = 25;
 
 gamma_2 = 10;
@@ -83,7 +83,7 @@ thetas = [flip(plant_param(1:N))' (flip(filter_param-plant_param(N+1:end)))']';
 
 %First set
 dc_1 = 0;
-W_1 = 5*rand(1,3);%
+W_1 = 5*rand(1,3);
 W_1 = [0.53326 4.8095 0.023171];
 
 A_1 = zeros(1,length(W_1));
