@@ -8,7 +8,7 @@ switch changed
     case 1
         str1 = strcat('$p_0=',num2str(gain_P0_1),'$');
         str2 = strcat('$p_0=',num2str(gain_P0_2),'$');
-        file_name = strcat('p0)',num2str(gain_P0_1),'p0',num2str(gain_P0_2));
+        file_name = strcat('p',num2str(gain_P0_1),'p',num2str(gain_P0_2));
         
     case 2
         str1 = '$r(t)=';
