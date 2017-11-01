@@ -71,7 +71,7 @@ A_2 = zeros(1,length(W_2));
 A_2(1) = 30;
 A_2(2) = 25;
 
-gain_P0_2 = 10;
+gain_P0_2 = 100;
 P0_2 = gain_P0_2*eye(2*N);
 p0_2 = reshape(P0_1,length(P0_1)^2,1);
 
