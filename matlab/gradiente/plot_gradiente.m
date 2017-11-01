@@ -1,8 +1,16 @@
 %-------- Print eps plots -----
 
+%Set matlab interpreter to latex
 set(groot, 'defaultAxesTickLabelInterpreter','latex');
 set(groot, 'defaultLegendInterpreter','latex');
 set(groot, 'defaultTextInterpreter','latex');
+
+%Set figures positions and size
+fig_xpos = 500;
+fig_ypos = 250;
+fig_width = 600;
+fig_height = 250;
+fig_pos = [fig_xpos fig_ypos fig_width fig_height];
 
 switch changed
     case 1
@@ -56,8 +64,8 @@ switch changed
                 theta_str_2 = strcat(theta_str_2,num2str(theta0(i)),'\,]');
             end
         end
-        str1 = strcat('$\theta(0)=',theta_str_1,'$');
-        str2 = strcat('$\theta(0)=',theta_str_2,'$');
+        str1 = strcat('$\theta(0)=',theta_str_1,'^T$');
+        str2 = strcat('$\theta(0)=',theta_str_2,'^T$');
         file_name = 'theta01theta02';
 end
 
@@ -67,6 +75,7 @@ path_epsilon = strcat('../../relatorio/figs/gradiente/epsilon/',sim_str,file_nam
 
 %--------------- Fig1: til_theta -------------
 figure(1);clf;
+set(gcf,'position',[fig_pos(1:2) fig_pos(3) 2*fig_pos(4)]);
 
 subplot(211);
 plot(T_1,tiltheta_1);grid on;
@@ -100,6 +109,7 @@ end
 
 %--------------- Fig2: mod theta -------------
 figure(2);clf;
+set(gcf,'position',fig_pos);
 
 plot(T_1,modtt_1);grid on;hold on;
 plot(T_2,modtt_2);
@@ -114,6 +124,7 @@ end
 
 %--------------- Fig3: epsilon -------------
 figure(3);clf;
+set(gcf,'position',fig_pos);
 
 plot(T_1,epsilon_1);grid;hold on;
 plot(T_2,epsilon_2);hold off;
