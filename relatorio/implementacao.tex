@@ -1,16 +1,10 @@
 \section{Implementação}
 
-O trabalho consiste em identificar dinamicamente os parâmetros do sistema para
-plantas de primeira, segunda e terceira ordem. Nesta seção, iremos descrever a
-implementação em MATLAB dos algoritmos do gradiente normalizado e \textit{least-square} normalizado.
+O trabalho consiste em identificar dinamicamente os parâmetros do sistema para plantas de primeira, segunda e terceira ordem. Nesta seção, iremos descrever a implementação em MATLAB dos algoritmos do gradiente normalizado e \textit{least-square} normalizado.
 
-A primeira etapa da implementação é definir as condições iniciais, parâmetros do
-sistema a serem identificados, função de transferência da planta, filtro e sinal
-de entrada.
+A primeira etapa da implementação é definir as condições iniciais, parâmetros do sistema a serem identificados, função de transferência da planta, filtro e sinal de entrada.
 
-As condições iniciais do sistema são os valores para $y(0)$, $\theta_0$ e $P_0$, este último somente no caso do método \textit{least-squares} normalizado.
-Consideremos uma planta estável de terceira ordem de forma a exemplificar com o
-sistema mais geral deste trabalho:
+As condições iniciais do sistema são os valores para $y(0)$, $\theta_0$ e $P_0$, este último somente no caso do método \textit{least-squares} normalizado. Consideremos uma planta estável de terceira ordem de forma a exemplificar com o sistema mais geral deste trabalho:
 %
 \begin{gather}
 P(s) \, [y](t) = Z(s) \, [u](t) \, \\
@@ -118,7 +112,7 @@ Resumidamente:
 \,.
 \end{gather}
 
-Podemos descrever a saída estimada e real do sistema pelos filtros:
+Podemos descrever a saÃ­da estimada e real do sistema pelos filtros:
 %
 \begin{gather}
 y = \theta^{*\intercal} \, \phi \, \\
@@ -145,3 +139,5 @@ m^2 \leftarrow 1 + \phi^\intercal P\phi\\
 \dot{P} \leftarrow -P \phi \phi^\intercal P / m^2
 \end{cases}
 \]
+
+Observe que no cálculo de $m^2$, fixamos o valor do parâmetro $\kappa$ em 1 para ambos os casos.

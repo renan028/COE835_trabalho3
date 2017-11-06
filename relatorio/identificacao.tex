@@ -133,7 +133,7 @@ gradiente descendente, minimizando a função custo normalizada:
 \begin{gather}
 J(\theta) = \frac{\epsilon^2}{2 \, m^2} =
 \frac{\tilde{\theta}^\intercal \, \phi \, \phi^\intercal \, \tilde{\theta}}{2 \, m^2},\\[5pt]
-m^2 = 1 + \kappa \, \phi^\intercal(t) \, \phi(t) \,.
+m^2 = 1 + \kappa \, \phi^\intercal(t) \, \phi(t) \,, \enskip \kappa > 0 \,.
 \end{gather}
 
 Derivando-se a função custo e igualando a zero, obtém-se a lei de adaptação paramétrica:
@@ -155,4 +155,4 @@ paramétrica é dada pelas equações:
 m^2(t) = 1 + \kappa \, \phi^\intercal(t) \, P(t) \, \phi(t) \,, \enskip \kappa > 0 \,.
 \end{gather}
 
-Em ambos os algoritmos, vale observar que é possível provar por Lyapunov a estabilidade e convergência de $\epsilon = \theta^\intercal(t) \, \phi(t) - y(t)$ para zero. Porém, esta condição não garante $\tilde{\theta} \rightarrow 0$, mas apenas a ortogonalidade entre os vetores de erro dos parâmetros $\tilde{\theta}$ e o regressor $\phi$. A convergência dos parâmetros é garantida quando há excitação persistente do sistema através da escolha adequada do sinal de referência.
+Em ambos os algoritmos, vale observar que é possível provar por Lyapunov a estabilidade e convergência de $\epsilon = \theta^\intercal(t) \, \phi(t) - y(t)$ para zero. Porém, esta condição não garante $\tilde{\theta} \rightarrow 0$, mas apenas a ortogonalidade entre os vetores de erro dos parâmetros $\tilde{\theta}$ e o regressor $\phi$. A convergência dos parâmetros é garantida quando há excitação persistente do sistema através da escolha adequada do sinal de referência.			

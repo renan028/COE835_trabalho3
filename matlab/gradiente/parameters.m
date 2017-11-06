@@ -96,7 +96,6 @@ gamma_1 = 10;
 uf0_1 = zeros(N,1);
 yf0_1 = zeros(N,1);
 theta0_1 = zeros(2*N,1);
-%theta0_1 = -thetas;% + 0.01*rand(2*N,1);
 
 %Second set
 dc_2 = 0;
